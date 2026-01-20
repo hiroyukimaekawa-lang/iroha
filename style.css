@@ -1,0 +1,754 @@
+/* ==========================================================================
+   Reset & Variables
+   ========================================================================== */
+:root {
+    --color-brown-dark: #3e2e28;
+    --color-brown-light: #5d4037;
+    --color-beige: #f5f1e8;
+    --color-gold: #c5a059;
+    --color-text-main: #333333;
+    --color-white: #ffffff;
+    --font-mincho: 'Noto Serif JP', serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-mincho);
+    background-color: var(--color-beige);
+    color: var(--color-text-main);
+    line-height: 1.8;
+    letter-spacing: 0.1em;
+    width: 100%;
+    overflow-x: hidden;
+    /* Apply washi texture to entire background for consistecy or just specific sections */
+    background-image: url('images/washi-bg.png');
+    background-repeat: repeat;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ==========================================================================
+   Typography & Utilities
+   ========================================================================== */
+.vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    letter-spacing: 0.2em;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin: 0 auto;
+    color: var(--color-brown-dark);
+}
+
+.section-title-white {
+    font-size: 2rem;
+    color: var(--color-white);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.container-narrow {
+    max-width: 800px;
+}
+
+.section-padding {
+    padding: 100px 0;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   Navigation
+   ========================================================================== */
+.mobile-nav-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 4px;
+}
+
+.mobile-nav-toggle span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: var(--color-brown-dark);
+    margin: 6px auto;
+    transition: 0.3s;
+}
+
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(62, 46, 40, 0.98);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+}
+
+.mobile-nav.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.mobile-nav ul li {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.mobile-nav ul li a {
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+/* ==========================================================================
+   1. First View (Hero)
+   ========================================================================== */
+.hero {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background-color: #fff;
+}
+
+/* Nav overlay on image */
+.hero-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    min-width: 400px;
+    /* Ensure enough space for all items */
+    height: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: flex-start;
+    /* Align to left */
+    align-items: flex-end;
+    padding-bottom: 60px;
+    /* Space from bottom */
+    padding-left: 60px;
+    /* Space from left */
+    pointer-events: none;
+}
+
+/* Re-enable pointer events for links */
+.vertical-nav {
+    pointer-events: auto;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 40px;
+    /* Slightly wider gap for elegance */
+    height: auto;
+    /* Add background or text-shadow for readability if over image */
+    /* For "Wa" style, usually just bold text or a subtle gradient behind is nice. 
+       Let's stick to clean text with text-shadow for now, or a very subtle scrim sidebar if preferred. 
+       User said "come on top", implying overlay. */
+}
+
+.nav-item {
+    writing-mode: vertical-rl;
+    font-size: 1.1rem;
+    color: #fff;
+    /* White text looks better on dark interior image */
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    /* Shadow for readability */
+    position: relative;
+    padding: 10px 0;
+}
+
+.nav-item.active,
+.nav-item:hover {
+    color: var(--color-gold);
+    font-weight: 700;
+}
+
+.hero-center {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    /* Ensure it takes full space */
+}
+
+.hero-image-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-logo {
+    position: absolute;
+    top: 15%;
+    right: 15%;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 2.5rem 1.5rem;
+    /* Adjusted padding */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    /* Ensure sizing fits content */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-logo h1 {
+    height: auto;
+    max-height: 400px;
+    display: flex;
+    /* flex for vertical writing items */
+    gap: 1rem;
+    /* Space between lines */
+    align-items: center;
+}
+
+.hero-logo .sub {
+    font-size: 1rem;
+    color: #555;
+    white-space: nowrap;
+    /* Prevent breaking */
+}
+
+.hero-logo .main {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #000;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.hero-right {
+    width: 80px;
+    background-color: var(--color-brown-dark);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.reserve-btn-vertical {
+    display: block;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.reserve-btn-vertical:hover {
+    background-color: var(--color-brown-light);
+}
+
+.reserve-btn-vertical .vertical-text {
+    font-size: 1.4rem;
+    letter-spacing: 0.3em;
+}
+
+/* ==========================================================================
+   2. Greeting
+   ========================================================================== */
+.greeting .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 600px;
+    position: relative;
+    z-index: 1;
+    /* Establish stacking context */
+}
+
+.greeting-text {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    z-index: 10;
+    /* Ensure text is above images */
+    position: relative;
+    padding: 60px 40px;
+    background: rgba(255, 255, 255, 0.9);
+    /* More opaque background */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+}
+
+.greeting-text p {
+    font-size: 1.2rem;
+    line-height: 2.5;
+    color: var(--color-text-main);
+}
+
+/* Creating hexagonal shapes using clip-path */
+.hex-image {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    z-index: 5;
+    /* Lower than text */
+    opacity: 0.8;
+    /* Slight transparency to blend better if it touches text */
+    transition: opacity 0.3s;
+}
+
+.hex-image:hover {
+    opacity: 1;
+    z-index: 15;
+    /* Pop up on hover */
+}
+
+
+.hex-inner {
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    overflow: hidden;
+}
+
+.hex-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hex-1 {
+    top: 50px;
+    left: 10%;
+}
+
+.hex-2 {
+    bottom: 50px;
+    right: 10%;
+}
+
+/* ==========================================================================
+   3. Main Visual
+   ========================================================================== */
+.main-visual {
+    height: 60vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.parallax-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    /* Taller for parallax */
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    transform: translateY(-10%);
+    /* Initial adjustment */
+}
+
+.visual-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.visual-text {
+    position: relative;
+    color: #fff;
+    font-size: 2rem;
+    display: flex;
+    gap: 60px;
+    height: auto;
+    width: 100%;
+    justify-content: center;
+    flex-direction: row;
+    /* Horizontal */
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.4);
+    /* Band background for better readability */
+    padding: 30px 0;
+}
+
+.visual-text span {
+    border-left: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
+    /* Divider on right */
+    padding-right: 60px;
+    /* Space after text */
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+}
+
+.visual-text span:last-child {
+    border-right: none;
+    padding-right: 0;
+}
+
+/* ==========================================================================
+   4. Menu
+   ========================================================================== */
+.menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    /* Full width touch */
+}
+
+.menu-item {
+    position: relative;
+    overflow: hidden;
+    group: hover-zoom;
+}
+
+.menu-img-box {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+}
+
+.menu-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.menu-item:hover .menu-img-box img {
+    transform: scale(1.05);
+}
+
+.menu-label-vertical {
+    position: absolute;
+    top: 0;
+    right: 30px;
+    /* Label on right side of image */
+    background: rgba(255, 255, 255, 0.9);
+    height: 60%;
+    padding: 30px 15px;
+    writing-mode: vertical-rl;
+    font-size: 1.5rem;
+    color: var(--color-text-main);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.menu-desc {
+    padding: 40px;
+    background: #fff;
+    text-align: center;
+}
+
+/* ==========================================================================
+   5. Info
+   ========================================================================== */
+.shop-info {
+    position: relative;
+    color: #fff;
+    padding: 100px 0;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shop-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+}
+
+.info-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 20, 15, 0.85);
+    z-index: -1;
+}
+
+.info-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 800px;
+}
+
+.info-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+dl {
+    width: 55%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+dt {
+    width: 30%;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 5px;
+}
+
+dd {
+    width: 70%;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 5px;
+}
+
+.hours-box {
+    width: 40%;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hours-box h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #fff;
+    display: inline-block;
+}
+
+.holiday {
+    margin-top: 15px;
+    color: var(--color-gold);
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   6. SNS
+   ========================================================================== */
+.sns-cards {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.sns-card {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    background: #fff;
+    padding: 30px;
+    border: 1px solid #ddd;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.sns-icon {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.sns-id {
+    color: #888;
+    margin-bottom: 20px;
+    font-family: sans-serif;
+    /* ID is usually alpha-numeric */
+}
+
+/* ==========================================================================
+   7. Footer
+   ========================================================================== */
+.footer {
+    position: relative;
+    padding: 60px 0 20px;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+}
+
+.footer-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-brown-dark);
+    /* Add a subtle pattern if available, or just solid color with texture image overlay */
+    background-image: url('images/washi-bg.png');
+    opacity: 0.1;
+    /* Blend the texture into the dark bg */
+    z-index: -1;
+}
+
+.footer::before {
+    /* Solid background behind the texture */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-brown-dark);
+    z-index: -2;
+}
+
+
+.footer-logo {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.footer-btn {
+    display: inline-block;
+    border: 1px solid #fff;
+    padding: 15px 40px;
+    margin: 30px 0;
+    font-size: 1.1rem;
+}
+
+.footer-btn:hover {
+    background: #fff;
+    color: var(--color-brown-dark);
+}
+
+.copyright {
+    display: block;
+    margin-top: 20px;
+    font-size: 0.8rem;
+    opacity: 0.7;
+    font-family: sans-serif;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 900px) {
+
+    /* Hero */
+    .hero {
+        flex-direction: column;
+    }
+
+    .hero-left,
+    .hero-right {
+        display: none;
+        /* Hide desktop sidebars */
+    }
+
+    .hero-logo {
+        right: 50%;
+        transform: translateX(50%);
+        top: 20%;
+    }
+
+    .mobile-nav-toggle {
+        display: block;
+    }
+
+    /* Hexagons */
+    .hex-1,
+    .hex-2 {
+        position: relative;
+        top: auto;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        margin: 20px auto;
+    }
+
+    .greeting-text {
+        margin-bottom: 30px;
+    }
+
+    .greeting-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Menu */
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Info */
+    .info-details {
+        flex-direction: column;
+    }
+
+    dl,
+    .hours-box {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+}

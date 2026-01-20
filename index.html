@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>和風ダイニング いろは | 神奈川県横須賀市</title>
+    <meta name="description" content="横須賀市の和風ダイニング「いろは」。落ち着いた空間で、季節の料理と美味しいお酒をお楽しみください。">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Loading Animation (Optional but good for premium feel) -->
+    <div id="loading" class="loading">
+        <div class="loading-logo">いろは</div>
+    </div>
+
+    <!-- Navigation (Mobile) -->
+    <div class="mobile-nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <nav class="mobile-nav">
+        <ul>
+            <li><a href="#home">トップ</a></li>
+            <li><a href="#greeting">こだわり</a></li>
+            <li><a href="#menu">お料理</a></li>
+            <li><a href="#menu">お飲み物</a></li> <!-- Shared section for simplicity in one-page -->
+            <li><a href="#info">店舗情報</a></li>
+        </ul>
+    </nav>
+
+    <!-- 1. First View -->
+    <section id="home" class="hero">
+        <div class="hero-left">
+            <nav class="vertical-nav">
+                <a href="#home" class="nav-item active">トップ</a>
+                <a href="#greeting" class="nav-item">こだわり</a>
+                <a href="#menu" class="nav-item">お料理</a>
+                <a href="#menu" class="nav-item">お飲み物</a>
+                <a href="#info" class="nav-item">店舗情報</a>
+            </nav>
+        </div>
+        <div class="hero-center">
+            <div class="hero-image-container">
+                <img src="images/interior.jpg" alt="店内の様子" class="hero-image">
+                <div class="hero-logo">
+                    <h1 class="vertical-text">
+                        <span class="sub">和風ダイニング</span>
+                        <span class="main">いろは</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="hero-right">
+            <a href="tel:0468131559" class="reserve-btn-vertical">
+                <span class="vertical-text">ご予約はこちら</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 2. Greeting (Goaisatsu) -->
+    <section id="greeting" class="greeting section-padding">
+        <div class="container relative">
+            <h2 class="section-title vertical-text fade-in">ごあいさつ</h2>
+            <div class="greeting-content">
+                <div class="greeting-text fade-in">
+                    <p>
+                        気楽にお客様が集まれる<br>
+                        居場所を提供しています。<br><br>
+                        料理に合うお酒を取り寄せ、<br>
+                        みんなで楽しめる<br>
+                        空間を目指しています。
+                    </p>
+                </div>
+                <!-- Hexagon Images Decoration -->
+                <div class="hex-image hex-1 fade-in">
+                    <div class="hex-inner">
+                        <img src="images/food.jpg" alt="料理イメージ">
+                    </div>
+                </div>
+                <div class="hex-image hex-2 fade-in">
+                    <div class="hex-inner">
+                        <img src="images/sake.jpg" alt="お酒イメージ">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Main Visual (Food) -->
+    <section id="main-visual" class="main-visual">
+        <div class="parallax-bg" style="background-image: url('images/food.jpg');"></div>
+        <div class="visual-overlay"></div>
+        <div class="visual-text">
+            <span>コース</span>
+            <span>一品料理</span>
+            <span>お飲み物</span>
+        </div>
+    </section>
+
+    <!-- 4. Menu Introduction -->
+    <section id="menu" class="menu section-padding">
+        <div class="menu-grid">
+            <div class="menu-item fade-in">
+                <div class="menu-img-box">
+                    <img src="images/food.jpg" alt="料理">
+                    <div class="menu-label-vertical">
+                        <h3>お料理</h3>
+                    </div>
+                </div>
+                <div class="menu-desc">
+                    <p>季節の食材をふんだんに使った<br>自慢の創作和食をご賞味ください。</p>
+                </div>
+            </div>
+            <div class="menu-item fade-in">
+                <div class="menu-img-box">
+                    <img src="images/sake.jpg" alt="お酒">
+                    <div class="menu-label-vertical">
+                        <h3>お飲み物</h3>
+                    </div>
+                </div>
+                <div class="menu-desc">
+                    <p>厳選された日本酒や焼酎など、<br>お料理に合う一杯をご提案します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Shop Info -->
+    <section id="info" class="shop-info">
+        <div class="shop-bg" style="background-image: url('images/interior.jpg');"></div>
+        <div class="info-overlay"></div>
+        <div class="container info-content fade-in">
+            <h2 class="section-title-white">店舗情報</h2>
+            <div class="info-details">
+                <dl>
+                    <dt>店舗名</dt>
+                    <dd>和風ダイニングいろは</dd>
+                    <dt>住所</dt>
+                    <dd>神奈川県横須賀市上町１丁目５６</dd>
+                    <dt>TEL</dt>
+                    <dd><a href="tel:0468131559">046-813-1559</a></dd>
+                    <dt>アクセス</dt>
+                    <dd>横須賀中央駅から徒歩5分</dd>
+                </dl>
+                <div class="hours-box">
+                    <h3>営業時間</h3>
+                    <p>木〜月：<br>13:00〜16:00 / 17:00〜23:00</p>
+                    <p class="holiday">定休日：火曜日</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. SNS -->
+    <section id="sns" class="sns section-padding">
+        <div class="container container-narrow">
+            <h2 class="section-title vertical-text fade-in">公式ＳＮＳ</h2>
+            <div class="sns-cards">
+                <a href="https://www.instagram.com/iroha_h168/" target="_blank" class="sns-card insta fade-in">
+                    <div class="sns-icon">Instagram</div>
+                    <div class="sns-id">@iroha_h168</div>
+                    <div class="sns-text">最新情報や本日の日替わりメニューなどを発信中</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Footer -->
+    <footer class="footer">
+        <div class="footer-bg"></div> <!-- Washi or Pattern -->
+        <div class="container">
+            <div class="footer-logo">いろは</div>
+            <div class="footer-info">
+                <p>046-813-1559</p>
+                <p>13:00〜16:00 / 17:00〜23:00</p>
+            </div>
+            <a href="tel:0468131559" class="footer-btn">ご予約はこちら</a>
+            <small class="copyright">Copyright © 和風ダイニングいろは All Rights Reserved.</small>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
