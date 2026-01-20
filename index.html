@@ -22,6 +22,15 @@
     </div>
 
     <!-- Navigation (Mobile) -->
+    <div class="mobile-fixed-footer">
+        <a href="tel:0468131559" class="footer-tel">
+            <span>ご予約はこちら</span>
+        </a>
+        <!-- <a href="#home" class="footer-reserve">
+            <span>Web Reservation</span>
+        </a> -->
+    </div>
+
     <div class="mobile-nav-toggle">
         <span></span>
         <span></span>
@@ -37,6 +46,11 @@
         </ul>
     </nav>
 
+    <!-- Fixed Reservation Sidebar -->
+    <a href="tel:0468131559" class="fixed-sidebar">
+        <span class="vertical-text">ご予約はこちら</span>
+    </a>
+
     <!-- 1. First View -->
     <section id="home" class="hero">
         <div class="hero-left">
@@ -50,7 +64,7 @@
         </div>
         <div class="hero-center">
             <div class="hero-image-container">
-                <img src="images/interior.jpg" alt="店内の様子" class="hero-image">
+                <img src="./images/store-image.jpg" alt="店内の様子" class="hero-image">
                 <div class="hero-logo">
                     <h1 class="vertical-text">
                         <span class="sub">和風ダイニング</span>
@@ -59,37 +73,34 @@
                 </div>
             </div>
         </div>
-        <div class="hero-right">
-            <a href="tel:0468131559" class="reserve-btn-vertical">
-                <span class="vertical-text">ご予約はこちら</span>
-            </a>
-        </div>
+        <!-- Right sidebar in hero removed as it is now global fixed sidebar, but let's check if we should keep it for the hero specific design or replace it. 
+             The request says "continuously on the right side". Usually this replaces the hero-specific one or overlaps it. 
+             To be safe and clean, I will remove the .hero-right element since the fixed one covers it. -->
     </section>
 
     <!-- 2. Greeting (Goaisatsu) -->
     <section id="greeting" class="greeting section-padding">
         <div class="container relative">
-            <h2 class="section-title vertical-text fade-in">ごあいさつ</h2>
-            <div class="greeting-content">
+            <!-- Scattered Images -->
+            <img src="images/food.jpg" alt="料理イメージ" class="scatter-img pos-1 fade-in">
+            <img src="images/food1.jpg" alt="料理イメージ" class="scatter-img pos-2 fade-in">
+            <img src="images/food2.jpg" alt="料理イメージ" class="scatter-img pos-3 fade-in">
+            <img src="images/food3.jpg" alt="料理イメージ" class="scatter-img pos-4 fade-in">
+            <img src="images/food4.jpg" alt="料理イメージ" class="scatter-img pos-5 fade-in">
+            <img src="images/food5.jpg" alt="料理イメージ" class="scatter-img pos-6 fade-in">
+
+            <div class="greeting-content-center">
+                <h2 class="section-title fade-in">ごあいさつ</h2>
                 <div class="greeting-text fade-in">
                     <p>
+                        大切なお客様へ。<br><br>
                         気楽にお客様が集まれる<br>
                         居場所を提供しています。<br><br>
                         料理に合うお酒を取り寄せ、<br>
                         みんなで楽しめる<br>
-                        空間を目指しています。
+                        空間を目指しています。<br><br>
+                        ぜひ、心ゆくまで、ご堪能ください。
                     </p>
-                </div>
-                <!-- Hexagon Images Decoration -->
-                <div class="hex-image hex-1 fade-in">
-                    <div class="hex-inner">
-                        <img src="images/food.jpg" alt="料理イメージ">
-                    </div>
-                </div>
-                <div class="hex-image hex-2 fade-in">
-                    <div class="hex-inner">
-                        <img src="images/sake.jpg" alt="お酒イメージ">
-                    </div>
                 </div>
             </div>
         </div>
@@ -100,9 +111,9 @@
         <div class="parallax-bg" style="background-image: url('images/food.jpg');"></div>
         <div class="visual-overlay"></div>
         <div class="visual-text">
-            <span>コース</span>
-            <span>一品料理</span>
-            <span>お飲み物</span>
+            <a href="#"><span>コース</span></a>
+            <a href="#"><span>一品料理</span></a>
+            <a href="#"><span>お飲み物</span></a>
         </div>
     </section>
 
@@ -163,12 +174,24 @@
     <!-- 6. SNS -->
     <section id="sns" class="sns section-padding">
         <div class="container container-narrow">
-            <h2 class="section-title vertical-text fade-in">公式ＳＮＳ</h2>
+            <h2 class="section-title fade-in">公式ＳＮＳ</h2>
             <div class="sns-cards">
                 <a href="https://www.instagram.com/iroha_h168/" target="_blank" class="sns-card insta fade-in">
-                    <div class="sns-icon">Instagram</div>
-                    <div class="sns-id">@iroha_h168</div>
-                    <div class="sns-text">最新情報や本日の日替わりメニューなどを発信中</div>
+                    <div class="sns-icon">
+                        <!-- Instagram Icon (SVG) -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                            stroke="#E4405F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-instagram">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </div>
+                    <!-- Text Description under icon -->
+                    <div class="sns-desc-container">
+                        <div class="sns-id">@iroha_h168</div>
+                        <div class="sns-text">最新情報や本日の日替わりメニューなどを発信中</div>
+                    </div>
                 </a>
             </div>
         </div>

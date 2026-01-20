@@ -1,16 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     /* -----------------------------------------------
        Intersection Observer for Fade-in Animations
     ----------------------------------------------- */
     const textFadeIns = document.querySelectorAll('.fade-in');
-    
+
     const appearOptions = {
         threshold: 0.15,
         rootMargin: "0px 0px -50px 0px"
     };
 
-    const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+    const appearOnScroll = new IntersectionObserver(function (entries, appearOnScroll) {
         entries.forEach(entry => {
             if (!entry.isIntersecting) {
                 return;
@@ -34,11 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', () => {
         let current = '';
-        
+
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
-            
+
             // Offset for visual comfort
             if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
                 current = section.getAttribute('id');
@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     toggle.addEventListener('click', () => {
         nav.classList.toggle('open');
+        toggle.classList.toggle('active');
         // Simple animation for hamburger icon could be added here
     });
 
@@ -92,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Simulating load time for effect, then removing
     setTimeout(() => {
         const loader = document.getElementById('loading');
-        if(loader) {
+        if (loader) {
             loader.style.opacity = '0';
             setTimeout(() => {
                 loader.style.display = 'none';

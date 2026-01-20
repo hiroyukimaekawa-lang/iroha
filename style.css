@@ -64,6 +64,7 @@ img {
     font-weight: 500;
     margin: 0 auto;
     color: var(--color-brown-dark);
+    text-align: center;
 }
 
 .section-title-white {
@@ -80,11 +81,17 @@ img {
 }
 
 .container-narrow {
-    max-width: 800px;
+    max-width: 600px;
+    /* Reduced from 800px for SNS section specifically if needed, or globally */
+}
+
+/* Specific narrow container for SNS to match request "width slightly shorter" */
+#sns .container-narrow {
+    max-width: 700px;
 }
 
 .section-padding {
-    padding: 100px 0;
+    padding: 60px 0;
 }
 
 .fade-in {
@@ -110,17 +117,39 @@ img {
     cursor: pointer;
     width: 40px;
     height: 40px;
-    background: rgba(255, 255, 255, 0.9);
+    /* Background removed for "cool" look, relying on hamburger lines color */
+    background: transparent;
     border-radius: 4px;
+    /* Remove white box shadow if present or keep clean */
 }
 
 .mobile-nav-toggle span {
     display: block;
-    width: 25px;
+    width: 30px;
+    /* Slightly wider for better impact */
     height: 2px;
     background: var(--color-brown-dark);
-    margin: 6px auto;
-    transition: 0.3s;
+    margin: 8px auto;
+    /* Expanded spacing */
+    transition: all 0.3s ease-in-out;
+    position: relative;
+}
+
+/* Hamburger Animation */
+.mobile-nav-toggle.active span {
+    background: #fff;
+}
+
+.mobile-nav-toggle.active span:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
+
+.mobile-nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-nav-toggle.active span:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
 }
 
 .mobile-nav {
@@ -143,6 +172,77 @@ img {
     opacity: 1;
     pointer-events: auto;
 }
+
+/* Mobile Fixed Footer (Hidden by default) */
+.mobile-fixed-footer {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: var(--color-brown-dark);
+    z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-fixed-footer a {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 1rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    height: 100%;
+}
+
+.mobile-fixed-footer a:last-child {
+    border-right: none;
+}
+
+.mobile-fixed-footer .footer-reserve {
+    background-color: var(--color-brown-light);
+    font-weight: 700;
+}
+
+/* Fixed Sidebar for Reservation */
+.fixed-sidebar {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    /* Center vertically */
+    width: 60px;
+    height: auto;
+    /* Allow content to dictate height */
+    padding: 40px 0;
+    /* Add top/bottom spacing */
+    background-color: var(--color-brown-dark);
+    color: #fff;
+    z-index: 998;
+    /* Below mobile nav toggle (1000) and nav (999) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px 0 0 10px;
+    /* Rounded corners on left side */
+}
+
+.fixed-sidebar:hover {
+    background-color: var(--color-brown-light);
+}
+
+.fixed-sidebar .vertical-text {
+    font-size: 1.2rem;
+    letter-spacing: 0.3em;
+}
+
+/* Adjust mobile nav toggle to not overlap if needed, or ensure sidebar is below it. 
+   Mobile nav toggle is right: 20px. Sidebar is width: 60px. 
+   Sidebar will be behind the toggle button visually if z-index is lower, which is good. */
 
 .mobile-nav ul li {
     margin: 30px 0;
@@ -226,7 +326,8 @@ img {
 
 .hero-image-container {
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    /* Fixed height relative to viewport to prevent resize shifts */
     overflow: hidden;
     position: relative;
 }
@@ -235,6 +336,33 @@ img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* Ensure image covers area without distortion */
+    animation: zoomHero 20s infinite alternate;
+    /* Slow zoom for premium feel */
+}
+
+/* Premium Overlay */
+.hero-image-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.4) 100%);
+    /* Vignette effect */
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+@keyframes zoomHero {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
 }
 
 .hero-logo {
@@ -276,35 +404,8 @@ img {
     white-space: nowrap;
 }
 
-.hero-right {
-    width: 80px;
-    background-color: var(--color-brown-dark);
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-}
-
-.reserve-btn-vertical {
-    display: block;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s;
-}
-
-.reserve-btn-vertical:hover {
-    background-color: var(--color-brown-light);
-}
-
-.reserve-btn-vertical .vertical-text {
-    font-size: 1.4rem;
-    letter-spacing: 0.3em;
-}
+/* .hero-right removed as it is replaced by .fixed-sidebar */
+/* Keeping .hero-right css just in case simple revert is needed? No, deleting for cleanliness as per plan. */
 
 /* ==========================================================================
    2. Greeting
@@ -313,71 +414,144 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 600px;
+    min-height: 800px;
+    /* Increased height to give space for images */
     position: relative;
     z-index: 1;
-    /* Establish stacking context */
+}
+
+.greeting-content-center {
+    position: relative;
+    z-index: 20;
+    /* Above images */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .greeting-text {
     max-width: 500px;
-    margin: 0 auto;
+    margin-top: 40px;
     text-align: center;
-    z-index: 10;
-    /* Ensure text is above images */
-    position: relative;
     padding: 60px 40px;
-    background: rgba(255, 255, 255, 0.9);
-    /* More opaque background */
+    /* Create a soft blurry background to make text readable over overlapping images */
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(5px);
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    /* Soft edges */
 }
 
 .greeting-text p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 2.5;
     color: var(--color-text-main);
+    letter-spacing: 0.15em;
 }
 
-/* Creating hexagonal shapes using clip-path */
-.hex-image {
+/* Scattered Images */
+.scatter-img {
     position: absolute;
-    width: 250px;
-    height: 250px;
-    z-index: 5;
-    /* Lower than text */
-    opacity: 0.8;
-    /* Slight transparency to blend better if it touches text */
-    transition: opacity 0.3s;
-}
-
-.hex-image:hover {
-    opacity: 1;
-    z-index: 15;
-    /* Pop up on hover */
-}
-
-
-.hex-inner {
-    width: 100%;
-    height: 100%;
-    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-    overflow: hidden;
-}
-
-.hex-inner img {
-    width: 100%;
-    height: 100%;
+    width: 180px;
+    /* Base size */
+    height: 180px;
     object-fit: cover;
+    border-radius: 50%;
+    /* Circle or keep square? User photo showed hexagon but request says "scatter photos". 
+                         Let's go with circle for "scattered food" feel or soft rounded rects. 
+                         Or maybe keeping them slightly organic. Let's try circle for now as it looks nice "scattered". 
+                         Or maybe just plain rectangles. Let's stick to rounded rectangles for food. */
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    /* for fade-in */
+    z-index: 5;
+    transition: all 0.5s ease;
 }
 
-.hex-1 {
-    top: 50px;
-    left: 10%;
+.scatter-img:hover {
+    z-index: 25;
+    /* Pop over text on hover? Maybe not, text is important. */
+    transform: scale(1.1);
 }
 
-.hex-2 {
-    bottom: 50px;
+/* Positions - using percentages to be responsive-ish */
+.pos-1 {
+    top: 5%;
+    left: 0%;
+    width: 200px;
+    height: 200px;
+}
+
+.pos-2 {
+    top: 10%;
+    right: 5%;
+    width: 160px;
+    height: 160px;
+}
+
+.pos-3 {
+    top: 40%;
+    left: -5%;
+    width: 150px;
+    height: 150px;
+}
+
+.pos-4 {
+    top: 45%;
+    right: -2%;
+    width: 190px;
+    height: 190px;
+}
+
+.pos-5 {
+    bottom: 5%;
+    left: 5%;
+    width: 220px;
+    height: 220px;
+}
+
+.pos-6 {
+    bottom: 2%;
     right: 10%;
+    width: 170px;
+    height: 170px;
+}
+
+/* Responsive Adjustments for Greeting */
+@media (max-width: 1100px) {
+
+    /* Pull images closer or hide some on smaller tablets */
+    .pos-1 {
+        left: 5%;
+        width: 150px;
+        height: 150px;
+    }
+
+    .pos-2 {
+        right: 5%;
+        width: 120px;
+        height: 120px;
+    }
+
+    .pos-3 {
+        left: 0%;
+        width: 120px;
+        height: 120px;
+    }
+
+    .pos-4 {
+        right: 0%;
+        width: 140px;
+        height: 140px;
+    }
+
+    .scatter-img {
+        opacity: 0.8;
+    }
+
+    /* Fade out slightly to focus on text */
 }
 
 /* ==========================================================================
@@ -420,7 +594,8 @@ img {
     color: #fff;
     font-size: 2rem;
     display: flex;
-    gap: 60px;
+    gap: 0;
+    /* Gap handled by padding in links now */
     height: auto;
     width: 100%;
     justify-content: center;
@@ -432,11 +607,47 @@ img {
     padding: 30px 0;
 }
 
-.visual-text span {
-    border-left: none;
+.visual-text a {
+    display: block;
+    padding: 0 40px;
+    /* Clickable area padding */
     border-right: 1px solid rgba(255, 255, 255, 0.5);
     /* Divider on right */
-    padding-right: 60px;
+    transition: all 0.3s;
+}
+
+@media(max-width: 900px) {
+    .visual-text a {
+        padding: 0 10px;
+        /* Much smaller padding for mobile */
+        font-size: 1rem;
+        /* Smaller text */
+    }
+
+    .visual-text {
+        font-size: 1rem;
+        /* Reset base size */
+        padding: 15px 0;
+    }
+}
+
+.visual-text a:last-child {
+    border-right: none;
+}
+
+.visual-text a:hover {
+    color: var(--color-gold);
+    background: rgba(255, 255, 255, 0.1);
+    /* Subtle hover highlight */
+    cursor: pointer;
+}
+
+.visual-text span {
+    border-left: none;
+    border-right: none;
+    /* Moved to anchor tag */
+    padding-right: 0;
+    /* Moved to anchor tag */
     /* Space after text */
     padding-left: 0;
     display: flex;
@@ -461,7 +672,7 @@ img {
 .menu-item {
     position: relative;
     overflow: hidden;
-    group: hover-zoom;
+    /* group property removed as it is invalid css */
 }
 
 .menu-img-box {
@@ -508,7 +719,7 @@ img {
     position: relative;
     color: #fff;
     padding: 100px 0;
-    min-height: 600px;
+    min-height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -597,32 +808,77 @@ dd {
 .sns-cards {
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 0px;
 }
 
 .sns-card {
     display: block;
     width: 100%;
-    max-width: 400px;
-    background: #fff;
-    padding: 30px;
-    border: 1px solid #ddd;
+    /* max-width: 400px; Remove or increase if needed for one line */
+    background: transparent;
+    /* Removed white background */
+    padding: 10px;
+    border: none;
+    /* Removed border */
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: none;
+    /* Removed shadow */
     border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.sns-card:hover {
+    transform: translateY(-5px);
+    /* box-shadow removed */
 }
 
 .sns-icon {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sns-icon svg {
+    width: 50px;
+    height: 50px;
+    stroke: var(--color-brown-dark);
+    /* Use theme color or default brand color */
+}
+
+/* Specific Instagram Color on hover? */
+.sns-card:hover .sns-icon svg {
+    stroke: #E4405F;
+    /* Instagram brand color */
+    /* Or gradient fill if possible, but stroke is clean */
+}
+
+.sns-desc-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
 .sns-id {
     color: #888;
-    margin-bottom: 20px;
+    font-size: 0.9rem;
     font-family: sans-serif;
-    /* ID is usually alpha-numeric */
+    font-weight: bold;
+    order: 2;
+    /* Put ID below text or above? User said "text under icon". 
+                 Usually it's Icon -> ID -> Text, or Icon -> Text -> ID. 
+                 Let's stick to HTML order but if user said "text under icon" specifically referring to description...
+                 Code replacement put description first then ID in HTML. Let's start with that. */
+}
+
+.sns-text {
+    color: var(--color-text-main);
+    font-size: 0.95rem;
+    /* Slightly smaller to fit */
+    white-space: nowrap;
+    /* Force one line */
+    line-height: 1.6;
 }
 
 /* ==========================================================================
@@ -695,45 +951,136 @@ dd {
 @media (max-width: 900px) {
 
     /* Hero */
+    /* Hero */
     .hero {
         flex-direction: column;
+        height: auto;
+        /* Allow height to adjust to content */
+        min-height: auto;
+        overflow: hidden;
+        /* Prevent spillover */
     }
 
-    .hero-left,
-    .hero-right {
+    .hero-left {
         display: none;
         /* Hide desktop sidebars */
+    }
+
+    /* Fixed Sidebar - Hide on mobile */
+    .fixed-sidebar {
+        display: none;
+    }
+
+    /* Mobile Fixed Footer - Show on mobile */
+    .mobile-fixed-footer {
+        display: flex;
     }
 
     .hero-logo {
         right: 50%;
         transform: translateX(50%);
         top: 20%;
+        /* Moved up to avoid bottom overlap */
+        padding: 1rem;
+    }
+
+    .hero-logo .main {
+        font-size: 1.8rem;
+        /* Further reduced */
+    }
+
+    .hero-logo .sub {
+        font-size: 0.7rem;
+    }
+
+    /* Reduce First View Height on Mobile */
+    /* Reduce First View Height on Mobile */
+    .hero-image-container {
+        height: 450px;
+        object-fit: cover;
+        /* User requested specific 450px height for mobile */
     }
 
     .mobile-nav-toggle {
         display: block;
     }
 
-    /* Hexagons */
-    .hex-1,
-    .hex-2 {
-        position: relative;
-        top: auto;
-        bottom: auto;
-        left: auto;
-        right: auto;
-        margin: 20px auto;
+    /* Greeting Mobile */
+    .greeting .container {
+        padding-top: 30px;
+        /* Reduced from 50px */
+        padding-bottom: 30px;
+        /* Reduced from 50px */
+        min-height: auto;
     }
 
     .greeting-text {
-        margin-bottom: 30px;
+        margin-bottom: 0;
+        padding: 20px 10px;
+        /* Reduced padding */
+        width: 100%;
+        margin-top: 0;
     }
 
-    .greeting-content {
+    /* Greeting Images Mobile - Show a few key images nicely */
+    .scatter-img {
+        display: block;
+        /* Show them */
+        width: 100px;
+        height: 100px;
+        opacity: 0.8;
+    }
+
+    /* Reposition specifically for mobile to avoid text */
+    /* Hide most, keep 2 for decoration */
+    .pos-1,
+    .pos-2,
+    .pos-3,
+    .pos-4,
+    .pos-5,
+    .pos-6 {
+        display: none;
+    }
+
+    /* Show just 2 examples */
+    .pos-1 {
+        display: block;
+        top: 0;
+        left: 5%;
+        width: 100px;
+        height: 100px;
+    }
+
+    .pos-6 {
+        display: block;
+        bottom: 0;
+        right: 5%;
+        width: 100px;
+        height: 100px;
+    }
+
+    .greeting-text {
+        margin-bottom: 20px;
+        /* Reduced from 30px */
+    }
+
+    .greeting-content-center {
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-top: 50px;
+        /* Reduced from 140px, relying on z-index */
+        position: relative;
+        z-index: 50;
+        /* Ensure text is above images (z-index 5) */
+    }
+
+    .greeting-text p {
+        line-height: 1.6;
+        /* Reduced slightly if it was larger */
+        margin-bottom: 1em;
+        font-size: 0.95rem;
+        /* Slightly smaller text */
     }
 
     /* Menu */
@@ -749,6 +1096,13 @@ dd {
     dl,
     .hours-box {
         width: 100%;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
+        /* Reduced from 30px */
+    }
+
+    /* General Section Padding reduction for mobile */
+    .section-padding {
+        padding-top: 10px;
+        padding-bottom: 20px;
     }
 }
